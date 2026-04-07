@@ -4,7 +4,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/voice", (req, res) => {
-  res.set("Content-Type", "text/xml");
+  res.type("text/xml");
   res.send(`
     <Response>
       <Say>Hello! Everything is working correctly.</Say>
@@ -13,10 +13,11 @@ app.post("/voice", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Server działa");
+  res.send("OK");
 });
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, "0.0.0.0", () => {
   console.log("Server running on port " + PORT);
 });
